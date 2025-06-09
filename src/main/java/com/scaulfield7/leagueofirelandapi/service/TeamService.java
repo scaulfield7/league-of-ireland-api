@@ -7,4 +7,7 @@ import org.springframework.stereotype.Service;
 public class TeamService {
     private List<Team> teams;
 
+    public TeamService() {
+
+    }
 }
