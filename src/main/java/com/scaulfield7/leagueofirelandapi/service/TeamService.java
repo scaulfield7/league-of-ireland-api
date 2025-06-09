@@ -9,5 +9,7 @@ public class TeamService {
 
     public TeamService() {
         teams = new ArrayList<>();
+
+        Team team1 = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie/");
     }
 }
