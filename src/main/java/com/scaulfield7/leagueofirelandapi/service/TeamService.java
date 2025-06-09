@@ -8,6 +8,6 @@ public class TeamService {
     private List<Team> teams;
 
     public TeamService() {
-
+        teams = new ArrayList<>();
     }
 }
