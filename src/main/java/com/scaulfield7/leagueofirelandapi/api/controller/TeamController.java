@@ -1,7 +1,10 @@
 package com.scaulfield7.leagueofirelandapi.api.controller;
 
+import com.scaulfield7.leagueofirelandapi.api.model.Team;
 import com.scaulfield7.leagueofirelandapi.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -11,5 +14,10 @@ public class TeamController {
     @Autowired
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
+    }
+
+    @GetMapping
+    public Team getTeam(@RequestParam Integer id) {
+        return teamService.getTeam(id);
     }
 }
