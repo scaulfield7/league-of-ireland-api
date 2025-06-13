@@ -22,5 +22,6 @@ public class TeamService {
         Team team7 = new Team(7, "Shamrock Rovers FC", 4, "Tallaght Stadium", "Collie O'Neill", "https://shamrockrovers.ie");
         Team team8 = new Team(8, "Shelbourne FC", 2, "Tolka Park", "Eoin Wearen", "https://shelbournefc.ie");
         Team team9 = new Team(9, "Sligo Rovers FC", 11, "The Showgrounds", "Steve Feeney", "https://sligorovers.com");
+        Team team10 = new Team(10, "Treaty United FC", 5, "Markets Field", "Sean Russell", "https://treatyunitedfc.com");
     }
 }
