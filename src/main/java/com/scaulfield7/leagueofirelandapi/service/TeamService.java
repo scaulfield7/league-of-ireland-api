@@ -20,5 +20,6 @@ public class TeamService {
         Team team5 = new Team(5, "Galway United FC", 7, "Eamonn Deacy Park", "Phil Trill", "https://galwayunitedfc.ie");
         Team team6 = new Team(6, "Peamount United FC", 6, "", "", "https://peamountunited.com");
         Team team7 = new Team(7, "Shamrock Rovers FC", 4, "Tallaght Stadium", "Collie O'Neill", "https://shamrockrovers.ie");
+        Team team8 = new Team(8, "Shelbourne FC", 2, "Tolka Park", "Eoin Wearen", "https://shelbournefc.ie");
     }
 }
