@@ -26,4 +26,8 @@ public class TeamService {
         Team team11 = new Team(11, "Waterford FC", 10, "Bishop's Gate", "Gary Hunt", "https://waterfordfc.ie");
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
     }
+
+    public Team getTeam(Integer id) {
+        return teams.get(id);
+    }
 }
