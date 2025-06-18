@@ -28,6 +28,10 @@ public class TeamService {
     }
 
     public Team getTeam(Integer id) {
-        return teams.get(id);
+        for(Team team : teams) {
+            if(team.getId() == id) {
+                return team;
+            }
+        }
     }
 }
