@@ -18,6 +18,8 @@ public class TeamController {
 
     @GetMapping
     public Team getTeam(@RequestParam Integer id) {
+        // Create dummy team for demonstration purposes
+        // TODO: Later replace with retrieving from a database or other data source
         return teamService.getTeam(id);
     }
 }
