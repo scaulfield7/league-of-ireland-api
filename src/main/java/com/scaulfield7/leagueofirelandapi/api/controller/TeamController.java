@@ -21,6 +21,6 @@ public class TeamController {
     @GetMapping("/team")
     public Team getTeam(@RequestParam Integer id) {
         Optional<Team> optionalTeam = teamService.getTeam(id);
-        return (Team) optionalTeam.orElse(null); // TODO: Handle case where team is not found
+        return (Team) optionalTeam.orElseThrow(() -> new RuntimeException("Team with ID " + id + " not found"));
     }
 }
