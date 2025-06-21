@@ -36,6 +36,6 @@ public class TeamService {
                 return optionalTeam;
             }
         }
-        return null; // TODO: Handle case where team is not found
+        return optionalTeam;
     }
 }
