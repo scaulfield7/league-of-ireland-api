@@ -29,7 +29,7 @@ public class TeamService {
     }
 
     public Optional<Team> getTeam(Integer id) {
-        Optional<Team> optionalTeam;
+        Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getId() == id) {
                 optionalTeam = Optional.of(team);
