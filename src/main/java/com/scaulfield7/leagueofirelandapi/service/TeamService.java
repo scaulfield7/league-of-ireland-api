@@ -27,7 +27,7 @@ public class TeamService {
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
     }
 
-    @GetMapping
+    @GetMapping("/team")
     public Team getTeam(Integer id) {
         for(Team team : teams) {
             if(team.getId() == id) {
