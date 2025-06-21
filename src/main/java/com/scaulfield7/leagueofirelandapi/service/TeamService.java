@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeamService {
@@ -28,11 +29,12 @@ public class TeamService {
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
     }
 
-    @GetMapping("/team")
-    public Team getTeam(Integer id) {
-        for(Team team : teams) {
-            if(team.getId() == id) {
-                return team;
+    public Optional<Team> getTeam(Integer id) {
+        Optional<Team> optionalTeam;
+        for (Team team : teams) {
+            if (team.getId() == id) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
             }
         }
         return null; // TODO: Handle case where team is not found
