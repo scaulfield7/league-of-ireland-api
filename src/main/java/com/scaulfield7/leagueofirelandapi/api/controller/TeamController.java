@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 public class TeamController {
     private TeamService teamService;
@@ -16,8 +18,9 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping
+    @GetMapping("/team")
     public Team getTeam(@RequestParam Integer id) {
-        return teamService.getTeam(id);
+        Optional<Team> optionalTeam = teamService.getTeam(id);
+        return (Team) optionalTeam.orElseThrow(() -> new RuntimeException("Team with ID " + id + " not found"));
     }
 }
