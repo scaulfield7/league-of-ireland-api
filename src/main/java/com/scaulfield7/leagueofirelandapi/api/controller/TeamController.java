@@ -20,7 +20,7 @@ public class TeamController {
 
     @GetMapping("/team")
     public Team getTeam(@RequestParam Integer id) {
-        Optional<Team> optionalTeam = teamService.getTeam(id);
+        Optional<Team> optionalTeam = teamService.getTeamByID(id);
         return (Team) optionalTeam.orElseThrow(() -> new RuntimeException("Team with ID " + id + " not found"));
     }
 }

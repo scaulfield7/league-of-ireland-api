@@ -31,7 +31,7 @@ public class TeamService {
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
     }
 
-    public Optional<Team> getTeam(Integer id) {
+    public Optional<Team> getTeamByID(Integer id) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getId() == id) {
