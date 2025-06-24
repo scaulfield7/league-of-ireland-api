@@ -1,6 +1,7 @@
 package com.scaulfield7.leagueofirelandapi.service;
 
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,9 +11,10 @@ import java.util.Optional;
 
 @Service
 public class TeamService {
+    private final PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer;
     private List<Team> teams;
 
-    public TeamService() {
+    public TeamService(PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) {
         teams = new ArrayList<>();
 
         Team team1 = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
@@ -29,6 +31,7 @@ public class TeamService {
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
 
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
+        this.propertySourcesPlaceholderConfigurer = propertySourcesPlaceholderConfigurer;
     }
 
     public Optional<Team> getTeamByID(Integer id) {
@@ -45,7 +48,7 @@ public class TeamService {
     public Optional<Team> getTeamByName(String name) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
-            if (team.getName() == name) {
+            if (team.getName().equals(name)) {
                 optionalTeam = Optional.of(team);
                 return optionalTeam;
             }
