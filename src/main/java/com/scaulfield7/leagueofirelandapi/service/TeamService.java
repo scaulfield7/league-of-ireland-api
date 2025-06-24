@@ -41,4 +41,15 @@ public class TeamService {
         }
         return optionalTeam;
     }
+
+    public Optional<Team> getTeamByName(String name) {
+        Optional<Team> optionalTeam = Optional.empty();
+        for (Team team : teams) {
+            if (team.getName() == name) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
+            }
+        }
+        return optionalTeam;
+    }
 }
