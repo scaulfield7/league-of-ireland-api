@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class TeamService {
-    private final PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer;
     private List<Team> teams;
 
     public TeamService(PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) {
@@ -31,7 +30,6 @@ public class TeamService {
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
 
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
-        this.propertySourcesPlaceholderConfigurer = propertySourcesPlaceholderConfigurer;
     }
 
     public Optional<Team> getTeamByID(Integer id) {
