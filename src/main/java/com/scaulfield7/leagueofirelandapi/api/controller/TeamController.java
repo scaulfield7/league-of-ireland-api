@@ -29,4 +29,9 @@ public class TeamController {
         Optional<Team> optionalTeam = teamService.getTeamByName(name);
         return optionalTeam.orElseThrow(() -> new RuntimeException("Team named " + name + " not found"));
     }
+
+    @GetMapping("/teams")
+    public Iterable<Team> getAllTeams() {
+        return teamService.getAllTeams();
+    }
 }

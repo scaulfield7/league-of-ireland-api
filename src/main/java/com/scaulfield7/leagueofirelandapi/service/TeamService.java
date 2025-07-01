@@ -55,4 +55,11 @@ public class TeamService {
         }
         return optionalTeam;
     }
+
+    public Iterable<Team> getAllTeams() {
+        if (teams.isEmpty()) {
+            throw new RuntimeException("No teams found");
+        }
+        return teams;
+    }
 }
