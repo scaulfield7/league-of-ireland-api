@@ -18,6 +18,11 @@ public class TeamController {
         this.teamService = teamService;
     }
 
+    @GetMapping("/teams")
+    public Iterable<Team> getAllTeams() {
+        return teamService.getAllTeams();
+    }
+
     @GetMapping("/teamByID")
     public Team getTeam(@RequestParam Integer id) {
         Optional<Team> optionalTeam = teamService.getTeamByID(id);
@@ -28,10 +33,5 @@ public class TeamController {
     public Team getTeam(@RequestParam String name){
         Optional<Team> optionalTeam = teamService.getTeamByName(name);
         return optionalTeam.orElseThrow(() -> new RuntimeException("Team named " + name + " not found"));
-    }
-
-    @GetMapping("/teams")
-    public Iterable<Team> getAllTeams() {
-        return teamService.getAllTeams();
     }
 }
