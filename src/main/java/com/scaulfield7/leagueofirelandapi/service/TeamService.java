@@ -46,7 +46,7 @@ public class TeamService {
     public Optional<Team> getTeamByName(String name) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
-            if (team.getName().equals(name)) {
+            if (team.getName().toLowerCase().equals(name.toLowerCase())) {
                 optionalTeam = Optional.of(team);
                 return optionalTeam;
             }
