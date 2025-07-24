@@ -9,5 +9,4 @@ public class LeagueOfIrelandApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(LeagueOfIrelandApiApplication.class, args);
     }
-
 }
