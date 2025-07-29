@@ -54,6 +54,17 @@ public class TeamService {
         return optionalTeam;
     }
 
+    public Optional<Team> getTeamByManager(String manager) {
+        Optional<Team> optionalTeam = Optional.empty();
+        for (Team team : teams) {
+            if (team.getManager().toLowerCase().equals(manager.toLowerCase())) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
+            }
+        }
+        return optionalTeam;
+    }
+
     public Iterable<Team> getAllTeams() {
         if (teams.isEmpty()) {
             throw new RuntimeException("No teams found");
