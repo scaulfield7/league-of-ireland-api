@@ -21,7 +21,7 @@ public class TeamService {
         Team team3 = new Team(3, "Cork City FC", 9, "Turner's Cross", "Frank Kelleher", "https://corkcityfc.ie");
         Team team4 = new Team(4, "DLR Waves FC", 12, "UCD Bowl", "Laura Heffernan", "https://dlrwaves.com");
         Team team5 = new Team(5, "Galway United FC", 7, "Eamonn Deacy Park", "Phil Trill", "https://galwayunitedfc.ie");
-        Team team6 = new Team(6, "Peamount United FC", 6, "", "Emma Donohue", "https://peamountunited.com");
+        Team team6 = new Team(6, "Peamount United FC", 6, "Greenogue Park", "Emma Donohue", "https://peamountunited.com");
         Team team7 = new Team(7, "Shamrock Rovers FC", 4, "Tallaght Stadium", "Stephanie Zambra", "https://shamrockrovers.ie");
         Team team8 = new Team(8, "Shelbourne FC", 2, "Tolka Park", "Eoin Wearen", "https://shelbournefc.ie");
         Team team9 = new Team(9, "Sligo Rovers FC", 11, "The Showgrounds", "Steve Feeney", "https://sligorovers.com");
