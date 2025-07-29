@@ -23,15 +23,14 @@ public class TeamController {
         return teamService.getAllTeams();
     }
 
-    @GetMapping("/team/id")
-    public Team getTeam(@RequestParam Integer id) {
-        Optional<Team> optionalTeam = teamService.getTeamByID(id);
-        return optionalTeam.orElseThrow(() -> new RuntimeException("Team with ID " + id + " not found"));
-    }
-
-    @GetMapping("/team/name")
-    public Team getTeam(@RequestParam String name){
-        Optional<Team> optionalTeam = teamService.getTeamByName(name);
-        return optionalTeam.orElseThrow(() -> new RuntimeException("Team named " + name + " not found"));
+    @GetMapping("/team")
+    public Team getTeam(@RequestParam String filter) {
+        if (filter.matches("\\d+")) {
+            Optional<Team> optionalTeam = teamService.getTeamByID(Integer.parseInt(filter));
+            return optionalTeam.orElseThrow(() -> new RuntimeException("Team with ID " + filter + " not found"));
+        } else {
+            Optional<Team> optionalTeam = teamService.getTeamByName(filter);
+            return optionalTeam.orElseThrow(() -> new RuntimeException("Team named " + filter + " not found"));
+        }
     }
 }
