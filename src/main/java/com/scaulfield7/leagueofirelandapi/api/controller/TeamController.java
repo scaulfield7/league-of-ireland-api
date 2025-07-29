@@ -30,6 +30,10 @@ public class TeamController {
             return optionalTeam.orElseThrow(() -> new RuntimeException("Team with ID " + filter + " not found"));
         } else {
             Optional<Team> optionalTeam = teamService.getTeamByName(filter);
+            if (optionalTeam.isEmpty()) {
+                optionalTeam = teamService.getTeamByManager(filter.toLowerCase());
+                return optionalTeam.orElseThrow(() -> new RuntimeException("Team managed by " + filter + " not found"));
+            }
             return optionalTeam.orElseThrow(() -> new RuntimeException("Team named " + filter + " not found"));
         }
     }
