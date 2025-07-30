@@ -24,4 +24,6 @@ public class TeamControllerTest {
             throw new RuntimeException("Expected team not found");
         }
     }
+
+    /*** Negative Tests ***/
 }
