@@ -5,7 +5,8 @@ import com.scaulfield7.leagueofirelandapi.service.TeamService;
 import org.junit.jupiter.api.Test;
 
 public class TeamControllerTest {
-    
+
+    /*** Positive Tests ***/
     @Test
     public void getTeam_validTeamId_returnsTeam() {
         TeamService teamService = new TeamService();
