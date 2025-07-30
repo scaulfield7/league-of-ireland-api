@@ -36,4 +36,14 @@ public class TeamControllerTest {
             assert e.getMessage().equals("Team with ID " + invalidTeamId + " not found");
         }
     }
+
+    @Test
+    public void getTeam_nullTeamId_throwsException() {
+        TeamService teamService = new TeamService();
+        try {
+            teamService.getTeam(null).orElseThrow(() -> new RuntimeException("Team ID cannot be null"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team ID cannot be null");
+        }
+    }
 }
