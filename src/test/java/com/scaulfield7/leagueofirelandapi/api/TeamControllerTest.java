@@ -26,4 +26,14 @@ public class TeamControllerTest {
     }
 
     /*** Negative Tests ***/
+    @Test
+    public void getTeam_invalidTeamId_throwsException() {
+        TeamService teamService = new TeamService();
+        int invalidTeamId = 13;
+        try {
+            teamService.getTeam(invalidTeamId).orElseThrow(() -> new RuntimeException("Team with ID " + invalidTeamId + " not found"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team with ID " + invalidTeamId + " not found");
+        }
+    }
 }
