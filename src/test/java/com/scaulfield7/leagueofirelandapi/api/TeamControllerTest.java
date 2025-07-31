@@ -25,6 +25,14 @@ public class TeamControllerTest {
         }
     }
 
+    @Test
+    public void getAllTeams_validRequest_returnsCorrectNumberOfTeams() {
+        TeamService teamService = new TeamService();
+        int expectedNumberOfTeams = 12;
+        int actualNumberOfTeams = teamService.getAllTeams().size();
+        assert actualNumberOfTeams == expectedNumberOfTeams;
+    }
+
     /*** Negative Tests ***/
     @Test
     public void getTeam_invalidTeamId_throwsException() {
