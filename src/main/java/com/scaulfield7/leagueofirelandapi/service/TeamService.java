@@ -71,6 +71,17 @@ public class TeamService {
         return optionalTeam;
     }
 
+    public Optional<Team> getTeamByHomePitch(String homePitch) {
+        Optional<Team> optionalTeam = Optional.empty();
+        for (Team team : teams) {
+            if (team.getHomePitch().equalsIgnoreCase(homePitch)) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
+            }
+        }
+        return optionalTeam;
+    }
+
     public Optional<Team> getTeamByManager(String manager) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
