@@ -1,7 +1,6 @@
 package com.scaulfield7.leagueofirelandapi.service;
 
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.Optional;
 public class TeamService {
     private List<Team> teams;
 
-    public TeamService(PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) {
+    public TeamService() {
         teams = new ArrayList<>();
 
         Team team1 = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
