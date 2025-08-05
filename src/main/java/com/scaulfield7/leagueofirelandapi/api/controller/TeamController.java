@@ -25,15 +25,10 @@ public class TeamController {
         return teamService.getAllTeams();
     }
 
-    @GetMapping("/teamIds")
-    public Collection<Integer> getAllTeamIds() {
-        return teamService.getAllTeamIds();
-    }
-
     @GetMapping("/team")
     public Team getTeam(@RequestParam String filter) {
         if (filter.matches("\\d+")) {
-            if (this.getAllTeamIds().contains(Integer.parseInt(filter))) {
+            if (this.teamService.getAllTeamIds().contains(Integer.parseInt(filter))) {
                 Optional<Team> optionalTeam = teamService.getTeamByID(Integer.parseInt(filter));
                 return optionalTeam.orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.ID +
