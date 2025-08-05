@@ -7,9 +7,11 @@ import java.util.*;
 
 @Service
 public class TeamService {
+    private final List<Integer> teamIds;
     private final List<Team> teams;
 
     public TeamService() {
+        teamIds = new ArrayList<>();
         teams = new ArrayList<>();
 
         Team team1 = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
@@ -26,6 +28,9 @@ public class TeamService {
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
 
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
+        teamIds.addAll(Arrays.asList(team1.getId(), team2.getId(), team3.getId(), team4.getId(),
+                team5.getId(), team6.getId(), team7.getId(), team8.getId(), team9.getId(),
+                team10.getId(), team11.getId(), team12.getId()));
     }
 
     public Collection<Team> getAllTeams() {
@@ -33,6 +38,13 @@ public class TeamService {
             throw new RuntimeException("No teams found");
         }
         return teams;
+    }
+
+    public Collection<Integer> getAllTeamIds() {
+        if (teamIds.isEmpty()) {
+            throw new RuntimeException("No team IDs found");
+        }
+        return teamIds;
     }
 
     public Optional<Team> getTeamByID(Integer id) {
