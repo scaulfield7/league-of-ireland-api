@@ -41,15 +41,13 @@ public class TeamController {
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
             }
         } else {
-            Optional<Team> optionalTeam = teamService.getTeamByName(filter);
-            if (optionalTeam.isEmpty()) {
-                if (this.teamService.getAllTeamNames().contains(filter.toLowerCase())) {
-                    return optionalTeam.orElseThrow(() ->
-                            new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
-                                    LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.TEAM +
-                                    LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.NAME +
-                                    LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
-                }
+            Optional<Team> optionalTeam = Optional.empty();
+            if (this.teamService.getAllTeamNames().contains(filter.toLowerCase())) {
+                return optionalTeam.orElseThrow(() ->
+                        new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.TEAM +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.NAME +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
             } else if (this.teamService.getAllTeamManagers().contains(filter.toLowerCase())) {
                 optionalTeam = teamService.getTeamByManager(filter.toLowerCase());
                 return optionalTeam.orElseThrow(() ->
