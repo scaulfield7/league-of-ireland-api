@@ -7,7 +7,6 @@ import java.util.*;
 
 @Service
 public class TeamService {
-    private final List<Integer> teamIds;
     private final List<Team> teams;
 
     public TeamService() {
