@@ -35,8 +35,10 @@ public class TeamController {
             if (optionalTeam.isEmpty()) {
                 optionalTeam = teamService.getTeamByName(filter.toLowerCase());
                 return optionalTeam.orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND +
-                        LeagueOfIrelandApiConstants.WITH + LeagueOfIrelandApiConstants.NAME + filter));
+                        LeagueOfIrelandApiConstants.WITH + LeagueOfIrelandApiConstants.TEAM +
+                        LeagueOfIrelandApiConstants.NAME + filter));
             }
+
             return optionalTeam.orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND +
                     LeagueOfIrelandApiConstants.WITH + LeagueOfIrelandApiConstants.MANAGER + filter));
         }
