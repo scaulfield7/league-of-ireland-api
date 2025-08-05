@@ -68,6 +68,17 @@ public class TeamService {
         return leagueRankings;
     }
 
+    public Collection<String> getAllTeamHomePitches() {
+        List<String> homePitches = new ArrayList<>();
+        for (Team team : teams) {
+            homePitches.add(team.getHomePitch());
+        }
+        if (homePitches.isEmpty()) {
+            throw new RuntimeException("No home pitches found");
+        }
+        return homePitches;
+    }
+
     public Optional<Team> getTeamByID(Integer id) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
