@@ -55,6 +55,7 @@ public class TeamController {
         }
         return teamService.getTeamByName(filter)
                 .orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
-                        LeagueOfIrelandApiConstants.VALUE + LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
+                        LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.VALUE +
+                        LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
     }
 }
