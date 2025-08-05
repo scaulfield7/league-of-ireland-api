@@ -35,7 +35,10 @@ public class TeamController {
             Optional<Team> optionalTeam = teamService.getTeamByName(filter);
             if (optionalTeam.isEmpty()) {
                 optionalTeam = teamService.getTeamByName(filter.toLowerCase());
-                return optionalTeam.or(() -> teamService.getTeamByManager(filter.toLowerCase())).orElseThrow(() ->
+                return optionalTeam
+                        .or(() -> teamService.getTeamByManager(filter.toLowerCase()))
+                        .or(() -> teamService.getTeamByHomePitch(filter.toLowerCase()))
+                        .orElseThrow(() ->
                         new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
                                 LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.TEAM +
                                 LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.NAME + "/" +
