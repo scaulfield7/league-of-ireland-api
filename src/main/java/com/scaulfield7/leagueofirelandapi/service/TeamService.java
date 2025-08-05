@@ -60,6 +60,17 @@ public class TeamService {
         return optionalTeam;
     }
 
+    public Optional<Team> getTeamByLeagueRanking(int leagueRanking) {
+        Optional<Team> optionalTeam = Optional.empty();
+        for (Team team : teams) {
+            if (team.getLeagueRanking() == leagueRanking) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
+            }
+        }
+        return optionalTeam;
+    }
+
     public Optional<Team> getTeamByManager(String manager) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
