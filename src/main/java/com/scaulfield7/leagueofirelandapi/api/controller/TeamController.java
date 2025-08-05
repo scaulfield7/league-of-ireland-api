@@ -33,6 +33,11 @@ public class TeamController {
                 return optionalTeam.orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.ID +
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
+            } else if (this.teamService.getAllTeamLeagueRankings().contains(Integer.parseInt(filter))) {
+                Optional<Team> optionalTeam = teamService.getTeamByLeagueRanking(Integer.parseInt(filter));
+                return optionalTeam.orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
+                        LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.LEAGUE_RANKING +
+                        LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
             }
         } else {
             Optional<Team> optionalTeam = teamService.getTeamByName(filter);

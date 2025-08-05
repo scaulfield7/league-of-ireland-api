@@ -8,4 +8,5 @@ public class LeagueOfIrelandApiConstants {
     public static final String NAME = "name";
     public static final String MANAGER = "manager";
     public static final String VALUE = "value";
+    public static final String LEAGUE_RANKING = "league ranking";
 }

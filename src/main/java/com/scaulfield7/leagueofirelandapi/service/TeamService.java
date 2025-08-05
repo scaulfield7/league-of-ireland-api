@@ -47,6 +47,17 @@ public class TeamService {
         return teamIds;
     }
 
+    public Collection<Integer> getAllTeamLeagueRankings() {
+        List<Integer> leagueRankings = new ArrayList<>();
+        for (Team team : teams) {
+            leagueRankings.add(team.getLeagueRanking());
+        }
+        if (leagueRankings.isEmpty()) {
+            throw new RuntimeException("No league rankings found");
+        }
+        return leagueRankings;
+    }
+
     public Optional<Team> getTeamByID(Integer id) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
