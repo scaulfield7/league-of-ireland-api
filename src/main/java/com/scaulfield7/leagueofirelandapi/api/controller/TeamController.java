@@ -41,6 +41,7 @@ public class TeamController {
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
             }
         } else {
+            // TODO: Resolve issue with getting team by String values other than name always returning default exception message from last return statement
             Optional<Team> optionalTeam = Optional.empty();
             if (this.teamService.getAllTeamNames().contains(filter.toLowerCase())) {
                 return optionalTeam.orElseThrow(() ->
