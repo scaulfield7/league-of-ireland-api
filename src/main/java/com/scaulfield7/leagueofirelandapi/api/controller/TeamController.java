@@ -28,6 +28,7 @@ public class TeamController {
     @GetMapping("/team")
     public Team getTeam(@RequestParam String filter) {
         if (filter.matches("\\d+")) {
+            // TODO: Refactor this to account for IDs and league rankings having the same valid values
             if (this.teamService.getAllTeamIds().contains(Integer.parseInt(filter))) {
                 Optional<Team> optionalTeam = teamService.getTeamByID(Integer.parseInt(filter));
                 return optionalTeam.orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
