@@ -32,6 +32,13 @@ public class TeamService {
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
     }
 
+    public Iterable<Team> getAllTeams() {
+        if (teams.isEmpty()) {
+            throw new RuntimeException("No teams found");
+        }
+        return teams;
+    }
+
     public Optional<Team> getTeamByID(Integer id) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
@@ -63,12 +70,5 @@ public class TeamService {
             }
         }
         return optionalTeam;
-    }
-
-    public Iterable<Team> getAllTeams() {
-        if (teams.isEmpty()) {
-            throw new RuntimeException("No teams found");
-        }
-        return teams;
     }
 }
