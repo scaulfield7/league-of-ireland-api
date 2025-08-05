@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +21,7 @@ public class TeamController {
     }
 
     @GetMapping("/teams")
-    public Iterable<Team> getAllTeams() {
+    public Collection<Team> getAllTeams() {
         return teamService.getAllTeams();
     }
 

@@ -3,10 +3,7 @@ package com.scaulfield7.leagueofirelandapi.service;
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TeamService {
@@ -31,7 +28,7 @@ public class TeamService {
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
     }
 
-    public Iterable<Team> getAllTeams() {
+    public Collection<Team> getAllTeams() {
         if (teams.isEmpty()) {
             throw new RuntimeException("No teams found");
         }
