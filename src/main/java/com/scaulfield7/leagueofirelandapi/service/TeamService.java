@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class TeamService {
-    private List<Team> teams;
+    private final List<Team> teams;
 
     public TeamService() {
         teams = new ArrayList<>();
@@ -52,7 +52,7 @@ public class TeamService {
     public Optional<Team> getTeamByName(String name) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
-            if (team.getName().toLowerCase().equals(name.toLowerCase())) {
+            if (team.getName().equalsIgnoreCase(name)) {
                 optionalTeam = Optional.of(team);
                 return optionalTeam;
             }
@@ -63,7 +63,7 @@ public class TeamService {
     public Optional<Team> getTeamByManager(String manager) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
-            if (team.getManager().toLowerCase().equals(manager.toLowerCase())) {
+            if (team.getManager().equalsIgnoreCase(manager)) {
                 optionalTeam = Optional.of(team);
                 return optionalTeam;
             }
