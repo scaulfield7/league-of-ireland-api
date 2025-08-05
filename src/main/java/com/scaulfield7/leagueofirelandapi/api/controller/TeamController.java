@@ -44,14 +44,25 @@ public class TeamController {
             Optional<Team> optionalTeam = teamService.getTeamByName(filter);
             if (optionalTeam.isEmpty()) {
                 optionalTeam = teamService.getTeamByName(filter.toLowerCase());
-                return optionalTeam
-                        .or(() -> teamService.getTeamByManager(filter.toLowerCase()))
-                        .or(() -> teamService.getTeamByHomePitch(filter.toLowerCase()))
-                        .orElseThrow(() ->
+                return optionalTeam.orElseThrow(() ->
                         new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
                                 LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.TEAM +
-                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.NAME + "/" +
-                                LeagueOfIrelandApiConstants.MANAGER + LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.NAME +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
+            } else if (this.teamService.getAllTeamManagers().contains(filter.toLowerCase())) {
+                optionalTeam = teamService.getTeamByManager(filter.toLowerCase());
+                return optionalTeam.orElseThrow(() ->
+                        new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.TEAM +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.MANAGER +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
+            } else if (this.teamService.getAllTeamHomePitches().contains(filter.toLowerCase())) {
+                optionalTeam = teamService.getTeamByHomePitch(filter.toLowerCase());
+                return optionalTeam.orElseThrow(() ->
+                        new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.TEAM +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.HOME_PITCH +
+                                LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
             }
         }
         return teamService.getTeamByName(filter)
