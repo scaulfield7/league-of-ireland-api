@@ -79,6 +79,17 @@ public class TeamService {
         return homePitches;
     }
 
+    public Collection<String> getAllTeamManagers() {
+        List<String> managers = new ArrayList<>();
+        for (Team team : teams) {
+            managers.add(team.getManager());
+        }
+        if (managers.isEmpty()) {
+            throw new RuntimeException("No managers found");
+        }
+        return managers;
+    }
+
     public Optional<Team> getTeamByID(Integer id) {
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
