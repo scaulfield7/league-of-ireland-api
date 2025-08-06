@@ -59,7 +59,7 @@ public class TeamControllerTest {
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
-            teamService.getAllTeams().orElseThrow(() -> new RuntimeException("Unable to retrieve teams"));
+            teamService.getAllTeams();
         } catch (RuntimeException e) {
             assert e.getMessage().equals("Unable to retrieve teams");
         }
