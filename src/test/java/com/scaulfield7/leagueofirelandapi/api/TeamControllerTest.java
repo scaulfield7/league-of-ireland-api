@@ -8,11 +8,11 @@ public class TeamControllerTest {
 
     /*** Positive Tests ***/
     @Test
-    public void getTeam_validTeamId_returnsTeam() {
+    public void getTeamById_validTeamId_returnsTeam() {
         TeamService teamService = new TeamService();
         int mockTeamId = 1;
         Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
-        Team actualTeam = teamService.getTeam(mockTeamId).orElse(null);
+        Team actualTeam = teamService.getTeamByID(mockTeamId).orElse(null);
         if (actualTeam != null) {
             assert actualTeam.getId() == expectedTeam.getId();
             assert actualTeam.getName().equals(expectedTeam.getName());
@@ -35,21 +35,21 @@ public class TeamControllerTest {
 
     /*** Negative Tests ***/
     @Test
-    public void getTeam_invalidTeamId_throwsException() {
+    public void getTeamById_invalidTeamId_throwsException() {
         TeamService teamService = new TeamService();
         int invalidTeamId = 13;
         try {
-            teamService.getTeam(invalidTeamId).orElseThrow(() -> new RuntimeException("Team with ID " + invalidTeamId + " not found"));
+            teamService.getTeamByID(invalidTeamId).orElseThrow(() -> new RuntimeException("Team with ID " + invalidTeamId + " not found"));
         } catch (RuntimeException e) {
             assert e.getMessage().equals("Team with ID " + invalidTeamId + " not found");
         }
     }
 
     @Test
-    public void getTeam_nullTeamId_throwsException() {
+    public void getTeamById_nullTeamId_throwsException() {
         TeamService teamService = new TeamService();
         try {
-            teamService.getTeam(null).orElseThrow(() -> new RuntimeException("Team ID cannot be null"));
+            teamService.getTeamByID(null).orElseThrow(() -> new RuntimeException("Team ID cannot be null"));
         } catch (RuntimeException e) {
             assert e.getMessage().equals("Team ID cannot be null");
         }
