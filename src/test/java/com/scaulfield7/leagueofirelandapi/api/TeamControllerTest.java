@@ -61,6 +61,8 @@ public class TeamControllerTest {
         }
     }
 
+    // TODO: Add getTeamByManager and getTeamByHomePitch positive and negative tests
+
     @Test
     public void getAllTeams_validRequest_returnsCorrectNumberOfTeams() {
         TeamService teamService = new TeamService();
