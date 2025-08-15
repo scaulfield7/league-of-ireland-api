@@ -94,6 +94,8 @@ public class TeamService {
         Optional<Team> optionalTeam = Optional.empty();
         if (id == null) {
             throw new RuntimeException("Team ID cannot be null");
+        } else if (id < 1) {
+            throw new RuntimeException("Team ID must be greater than 0");
         }
         for (Team team : teams) {
             if (team.getId() == id) {
