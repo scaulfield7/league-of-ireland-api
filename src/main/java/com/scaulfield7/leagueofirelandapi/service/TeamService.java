@@ -111,8 +111,7 @@ public class TeamService {
     public Optional<Team> getTeamByName(String name) {
         if (name == null) {
             throw new RuntimeException("Team name cannot be null");
-        }
-        if (name.isEmpty()) {
+        } else if (name.isEmpty()) {
             throw new RuntimeException("Team name cannot be empty. Team name provided: " + name);
         } else if (name.length() < 3) {
             throw new RuntimeException("Team name must be at least 3 characters long. Team name provided: " + name);
