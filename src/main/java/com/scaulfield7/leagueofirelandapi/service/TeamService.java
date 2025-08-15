@@ -92,6 +92,9 @@ public class TeamService {
 
     public Optional<Team> getTeamByID(Integer id) {
         Optional<Team> optionalTeam = Optional.empty();
+        if (id == null) {
+            throw new RuntimeException("Team ID cannot be null");
+        }
         for (Team team : teams) {
             if (team.getId() == id) {
                 optionalTeam = Optional.of(team);
