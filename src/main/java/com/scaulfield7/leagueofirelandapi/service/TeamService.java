@@ -129,6 +129,11 @@ public class TeamService {
     }
 
     public Optional<Team> getTeamByLeagueRanking(int leagueRanking) {
+        if (leagueRanking < 1) {
+            throw new RuntimeException("League ranking value must be greater than 0. League ranking value provided: " + leagueRanking);
+        } else if (leagueRanking > teams.size()) {
+            throw new RuntimeException("Team with league ranking " + leagueRanking + " not found");
+        }
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getLeagueRanking() == leagueRanking) {
