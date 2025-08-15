@@ -117,6 +117,28 @@ public class TeamControllerTest {
     }
 
     @Test
+    public void getTeamByName_teamNameTooShort_throwsException() {
+        TeamService teamService = new TeamService();
+        String shortTeamName = "AB";
+        try {
+            teamService.getTeamByName(shortTeamName).orElseThrow(() -> new RuntimeException("Team name must be at least 3 characters long"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team name must be at least 3 characters long. Team name provided: " + shortTeamName);
+        }
+    }
+
+    @Test
+    public void getTeamByName_teamNameTooLong_throwsException() {
+        TeamService teamService = new TeamService();
+        String longTeamName = "A".repeat(51); // 51 characters long
+        try {
+            teamService.getTeamByName(longTeamName).orElseThrow(() -> new RuntimeException("Team name must be less than 50 characters long"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team name must be less than 50 characters long. Team name provided: " + longTeamName);
+        }
+    }
+
+    @Test
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
