@@ -80,7 +80,7 @@ public class TeamControllerTest {
         try {
             teamService.getTeamByID(negativeTeamId).orElseThrow(() -> new RuntimeException("Team ID must be greater than 0"));
         } catch (RuntimeException e) {
-            assert e.getMessage().equals("Team ID must be greater than 0");
+            assert e.getMessage().equals("Team ID must be greater than 0. Team ID provided: " + negativeTeamId);
         }
     }
 
