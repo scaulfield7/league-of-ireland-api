@@ -85,6 +85,17 @@ public class TeamControllerTest {
     }
 
     @Test
+    public void getTeamByName_invalidTeamName_throwsException() {
+        TeamService teamService = new TeamService();
+        String invalidTeamName = "Team Not In League FC";
+        try {
+            teamService.getTeamByName(invalidTeamName).orElseThrow(() -> new RuntimeException("No team found with name: " + invalidTeamName));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("No team found with name: " + invalidTeamName);
+        }
+    }
+
+    @Test
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
