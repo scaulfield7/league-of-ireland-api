@@ -97,7 +97,7 @@ public class TeamService {
         } else if (id < 1) {
             throw new RuntimeException("Team ID must be greater than 0");
         } else if (id > teams.size()) {
-            throw new RuntimeException("Team ID does not exist");
+            throw new RuntimeException("Team with ID " + id + " not found");
         }
         for (Team team : teams) {
             if (team.getId() == id) {
