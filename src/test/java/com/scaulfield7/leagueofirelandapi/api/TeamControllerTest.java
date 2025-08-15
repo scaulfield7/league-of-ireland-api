@@ -106,6 +106,17 @@ public class TeamControllerTest {
     }
 
     @Test
+    public void getTeamByName_teamNameEmpty_throwsException() {
+        TeamService teamService = new TeamService();
+        String emptyTeamName = "";
+        try {
+            teamService.getTeamByName(emptyTeamName).orElseThrow(() -> new RuntimeException("Team name cannot be empty"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team name cannot be empty. Team name provided: " + emptyTeamName);
+        }
+    }
+
+    @Test
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
