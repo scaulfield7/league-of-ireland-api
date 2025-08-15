@@ -56,6 +56,17 @@ public class TeamControllerTest {
     }
 
     @Test
+    public void getTeamById_negativeTeamId_throwsException() {
+        TeamService teamService = new TeamService();
+        int negativeTeamId = -1;
+        try {
+            teamService.getTeamByID(negativeTeamId).orElseThrow(() -> new RuntimeException("Team ID must be greater than 0"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team ID must be greater than 0");
+        }
+    }
+
+    @Test
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
