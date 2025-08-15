@@ -112,6 +112,9 @@ public class TeamService {
         if (name == null) {
             throw new RuntimeException("Team name cannot be null");
         }
+        if (name.isEmpty()) {
+            throw new RuntimeException("Team name cannot be empty. Team name provided: " + name);
+        }
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getName().equalsIgnoreCase(name)) {
