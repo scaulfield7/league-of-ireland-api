@@ -94,7 +94,7 @@ public class TeamService {
         if (id == null) {
             throw new RuntimeException("Team ID cannot be null");
         } else if (id < 1) {
-            throw new RuntimeException("Team ID must be greater than 0");
+            throw new RuntimeException("Team ID must be greater than 0. Team ID provided: " + id);
         } else if (id > teams.size()) {
             throw new RuntimeException("Team with ID " + id + " not found");
         }
