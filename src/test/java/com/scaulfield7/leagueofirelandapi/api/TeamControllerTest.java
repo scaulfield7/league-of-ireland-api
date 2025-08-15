@@ -64,7 +64,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamById_nullTeamId_throwsException() {
+    public void getTeamById_teamIdNull_throwsException() {
         TeamService teamService = new TeamService();
         try {
             teamService.getTeamByID(null).orElseThrow(() -> new RuntimeException("Team ID cannot be null"));
