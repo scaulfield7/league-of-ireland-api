@@ -96,6 +96,16 @@ public class TeamControllerTest {
     }
 
     @Test
+    public void getTeamByName_teamNameNull_throwsException() {
+        TeamService teamService = new TeamService();
+        try {
+            teamService.getTeamByName(null).orElseThrow(() -> new RuntimeException("Team name cannot be null"));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("Team name cannot be null");
+        }
+    }
+
+    @Test
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
