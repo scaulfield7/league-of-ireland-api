@@ -176,7 +176,7 @@ public class TeamControllerTest {
         try {
             teamService.getTeamByLeagueRanking(negativeLeagueRanking).orElseThrow(() -> new RuntimeException("League ranking value must be greater than 0"));
         } catch (RuntimeException e) {
-            assert e.getMessage().equals("League ranking must be greater than 0. League ranking value provided: " + negativeLeagueRanking);
+            assert e.getMessage().equals("League ranking value must be greater than 0. League ranking value provided: " + negativeLeagueRanking);
         }
     }
 
