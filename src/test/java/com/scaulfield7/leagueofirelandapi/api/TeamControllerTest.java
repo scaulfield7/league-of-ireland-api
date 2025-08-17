@@ -62,6 +62,23 @@ public class TeamControllerTest {
     }
 
     // TODO: Add getTeamByManager and getTeamByHomePitch positive and negative tests
+    @Test
+    public void getTeamByHomePitch_validHomePitch_returnsTeam() {
+        TeamService teamService = new TeamService();
+        String mockHomePitch = "Athlone Town Stadium";
+        Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
+        Team actualTeam = teamService.getTeamByHomePitch(mockHomePitch).orElse(null);
+        if (actualTeam != null) {
+            assert actualTeam.getId() == expectedTeam.getId();
+            assert actualTeam.getName().equals(expectedTeam.getName());
+            assert actualTeam.getLeagueRanking() == expectedTeam.getLeagueRanking();
+            assert actualTeam.getHomePitch().equals(expectedTeam.getHomePitch());
+            assert actualTeam.getManager().equals(expectedTeam.getManager());
+            assert actualTeam.getWebsite().equals(expectedTeam.getWebsite());
+        } else {
+            throw new RuntimeException("Expected team not found");
+        }
+    }
 
     @Test
     public void getAllTeams_validRequest_returnsCorrectNumberOfTeams() {
