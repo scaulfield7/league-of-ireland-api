@@ -1,25 +1,35 @@
 package com.scaulfield7.leagueofirelandapi.api.controller;
 
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
+<<<<<<< Updated upstream
 import com.scaulfield7.leagueofirelandapi.constants.LeagueOfIrelandApiConstants;
+=======
+>>>>>>> Stashed changes
 import com.scaulfield7.leagueofirelandapi.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< Updated upstream
 import java.util.Collection;
 import java.util.Optional;
 
 @RestController
 public class TeamController {
     private final TeamService teamService;
+=======
+@RestController
+public class TeamController {
+    private TeamService teamService;
+>>>>>>> Stashed changes
 
     @Autowired
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
 
+<<<<<<< Updated upstream
     @GetMapping("/teams")
     public Collection<Team> getAllTeams() {
         return teamService.getAllTeams();
@@ -69,5 +79,11 @@ public class TeamController {
                 .orElseThrow(() -> new RuntimeException(LeagueOfIrelandApiConstants.NO_TEAM_FOUND_WITH +
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + LeagueOfIrelandApiConstants.VALUE +
                         LeagueOfIrelandApiConstants.EMPTY_SPACE + filter));
+=======
+    @GetMapping
+    public Team getTeam(@RequestParam Integer id) {
+        // Create dummy team for demonstration purposes
+        return teamService.getTeam(id);
+>>>>>>> Stashed changes
     }
 }
