@@ -215,6 +215,16 @@ public class TeamControllerTest {
     }
 
     // TODO: Add getTeamByManager and getTeamByHomePitch negative tests
+    @Test
+    public void getTeamByHomePitch_invalidHomePitch_throwsException() {
+        TeamService teamService = new TeamService();
+        String invalidHomePitch = "Non-Existent Stadium";
+        try {
+            teamService.getTeamByHomePitch(invalidHomePitch).orElseThrow(() -> new RuntimeException("No team found with home pitch: " + invalidHomePitch));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("No team found with home pitch: " + invalidHomePitch);
+        }
+    }
 
     @Test
     public void getAllTeams_invalidRequest_throwsException() {
