@@ -227,6 +227,17 @@ public class TeamControllerTest {
     }
 
     @Test
+    public void getTeamByManager_invalidManagerName_throwsException() {
+        TeamService teamService = new TeamService();
+        String invalidManagerName = "Non-Existent Manager";
+        try {
+            teamService.getTeamByManager(invalidManagerName).orElseThrow(() -> new RuntimeException("No team found with manager: " + invalidManagerName));
+        } catch (RuntimeException e) {
+            assert e.getMessage().equals("No team found with manager: " + invalidManagerName);
+        }
+    }
+
+    @Test
     public void getAllTeams_invalidRequest_throwsException() {
         TeamService teamService = new TeamService();
         try {
