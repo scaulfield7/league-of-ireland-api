@@ -213,8 +213,7 @@ public class TeamControllerTest {
             assert e.getMessage().equals("League ranking value must be greater than 0. League ranking value provided: " + negativeLeagueRanking);
         }
     }
-
-    // TODO: Add getTeamByManager and getTeamByHomePitch negative tests
+    
     @Test
     public void getTeamByHomePitch_invalidHomePitch_throwsException() {
         TeamService teamService = new TeamService();
