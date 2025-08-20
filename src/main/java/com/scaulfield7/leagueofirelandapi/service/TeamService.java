@@ -145,6 +145,15 @@ public class TeamService {
     }
 
     public Optional<Team> getTeamByHomePitch(String homePitch) {
+        if (homePitch == null) {
+            throw new RuntimeException("Home pitch cannot be null");
+        } else if (homePitch.isEmpty()) {
+            throw new RuntimeException("Home pitch cannot be empty. Home pitch provided: " + homePitch);
+        } else if (homePitch.length() < 3) {
+            throw new RuntimeException("Home pitch must be at least 3 characters long. Home pitch provided: " + homePitch);
+        } else if (homePitch.length() > 50) {
+            throw new RuntimeException("Home pitch must be less than 50 characters long. Home pitch provided: " + homePitch);
+        }
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getHomePitch().equalsIgnoreCase(homePitch)) {
@@ -156,6 +165,15 @@ public class TeamService {
     }
 
     public Optional<Team> getTeamByManager(String manager) {
+        if (manager == null) {
+            throw new RuntimeException("Manager name cannot be null");
+        } else if (manager.isEmpty()) {
+            throw new RuntimeException("Manager name cannot be empty. Manager name provided: " + manager);
+        } else if (manager.length() < 3) {
+            throw new RuntimeException("Manager name must be at least 3 characters long. Manager name provided: " + manager);
+        } else if (manager.length() > 50) {
+            throw new RuntimeException("Manager name must be less than 50 characters long. Manager name provided: " + manager);
+        }
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getManager().equalsIgnoreCase(manager)) {
