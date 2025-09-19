@@ -37,6 +37,18 @@ public class TeamService {
     }
 
     /**
+     * Initialise teams at application startup
+     */
+    @PostConstruct
+    public void init() {
+        try {
+            loadTeamsFromWeb();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Loads teams dynamically from the League of Ireland website
      */
     public void loadTeamsFromWeb() throws Exception {
