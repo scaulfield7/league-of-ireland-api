@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @Service
 public class TeamService {
+    private final ScraperService scraperService;
     private List<Team> teams;
 
-    public TeamService(PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) {
+    public TeamService(ScraperService scraperService, PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) {
+        this.scraperService = scraperService;
         teams = new ArrayList<>();
 
         Team team1 = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
