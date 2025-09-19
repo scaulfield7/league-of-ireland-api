@@ -1,6 +1,8 @@
 package com.scaulfield7.leagueofirelandapi.service;
 
+import com.gargoylesoftware.htmlunit.html.*;
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,11 @@ import java.util.Optional;
 @Service
 public class TeamService {
     private final ScraperService scraperService;
-    private List<Team> teams;
+    private final List<Team> teams;
 
-    public TeamService(ScraperService scraperService, PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) {
+    public TeamService(ScraperService scraperService, PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) throws Exception {
         this.scraperService = scraperService;
-        teams = new ArrayList<>();
+        this.teams = new ArrayList<>();
 
         Team team1 = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
         Team team2 = new Team(2, "Bohemians FC", 8, "Dalymount Park", "Alban Hysa", "https://bohemians.ie");
@@ -32,6 +34,45 @@ public class TeamService {
         Team team12 = new Team(12, "Wexford FC", 3, "Ferrycarrig Park", "Sean Byrne", "https://wexfordfc.ie");
 
         teams.addAll(Arrays.asList(team1, team2, team3, team4, team5, team6, team7, team8, team9, team10, team11, team12));
+    }
+
+    /**
+     * Loads teams dynamically from the League of Ireland website
+     */
+    public void loadTeamsFromWeb() throws Exception {
+        List<String> urls = scraperService.scrapeTeamUrls();
+        for (String url : urls) {
+            HtmlPage teamPage = scraperService.getWebClient().getPage(url);
+            // Safe extraction with casting
+            String name = safeExtractText(teamPage, "//h1", HtmlHeading1.class);
+            String stadium = safeExtractText(teamPage, "//div[@class='stadium']", HtmlDivision.class);
+            String manager = safeExtractText(teamPage, "//div[@class='manager']", HtmlDivision.class);
+            String website = safeExtractHref(teamPage, "//a[contains(@href,'http')]");
+
+            Team team = new Team(teams.size() + 1, name, 0, stadium, manager, website);
+            teams.add(team);
+        }
+    }
+
+    // Helper to safely extract text from HtmlElement
+    private String safeExtractText(HtmlPage page, String xpath, Class<? extends HtmlElement> clazz) {
+        try {
+            HtmlElement raw = page.getFirstByXPath(xpath);
+            if (raw == null) return "";
+            return clazz.cast(raw).getTextContent();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    // Helper to safely extract href from HtmlAnchor
+    private String safeExtractHref(HtmlPage page, String xpath) {
+        try {
+            HtmlAnchor anchor = (HtmlAnchor) page.getFirstByXPath(xpath);
+            return anchor != null ? anchor.getHrefAttribute() : "";
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public Optional<Team> getTeamByID(Integer id) {
