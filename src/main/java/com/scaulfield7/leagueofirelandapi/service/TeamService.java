@@ -6,10 +6,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TeamService {
@@ -85,6 +82,68 @@ public class TeamService {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public Collection<Team> getAllTeams() {
+        if (teams.isEmpty()) {
+            throw new RuntimeException("No teams found");
+        }
+        return teams;
+    }
+
+    public Collection<Integer> getAllTeamIds() {
+        List<Integer> teamIds = new ArrayList<>();
+        for (Team team : teams) {
+            teamIds.add(team.getId());
+        }
+        if (teamIds.isEmpty()) {
+            throw new RuntimeException("No team IDs found");
+        }
+        return teamIds;
+    }
+
+    public Collection<String> getAllTeamNames() {
+        List<String> teamNames = new ArrayList<>();
+        for (Team team : teams) {
+            teamNames.add(team.getName());
+        }
+        if (teamNames.isEmpty()) {
+            throw new RuntimeException("No team names found");
+        }
+        return teamNames;
+    }
+
+    public Collection<Integer> getAllTeamLeagueRankings() {
+        List<Integer> leagueRankings = new ArrayList<>();
+        for (Team team : teams) {
+            leagueRankings.add(team.getLeagueRanking());
+        }
+        if (leagueRankings.isEmpty()) {
+            throw new RuntimeException("No league rankings found");
+        }
+        return leagueRankings;
+    }
+
+    public Collection<String> getAllTeamHomePitches() {
+        List<String> homePitches = new ArrayList<>();
+        for (Team team : teams) {
+            homePitches.add(team.getHomePitch());
+        }
+        if (homePitches.isEmpty()) {
+            throw new RuntimeException("No home pitches found");
+        }
+        return homePitches;
+    }
+
+    public Collection<String> getAllTeamManagers() {
+        List<String> managers = new ArrayList<>();
+        for (Team team : teams) {
+            managers.add(team.getManager());
+        }
+        if (managers.isEmpty()) {
+            throw new RuntimeException("No managers found");
+        }
+        return managers;
     }
 
     public Optional<Team> getTeamByID(Integer id) {
@@ -179,12 +238,5 @@ public class TeamService {
             }
         }
         return optionalTeam;
-    }
-
-    public Iterable<Team> getAllTeams() {
-        if (teams.isEmpty()) {
-            throw new RuntimeException("No teams found");
-        }
-        return teams;
     }
 }
