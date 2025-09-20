@@ -88,6 +88,13 @@ public class TeamService {
     }
 
     public Optional<Team> getTeamByID(Integer id) {
+        if (id == null) {
+            throw new RuntimeException("Team ID cannot be null");
+        } else if (id < 1) {
+            throw new RuntimeException("Team ID must be greater than 0. Team ID provided: " + id);
+        } else if (id > teams.size()) {
+            throw new RuntimeException("Team with ID " + id + " not found");
+        }
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
             if (team.getId() == id) {
@@ -99,9 +106,18 @@ public class TeamService {
     }
 
     public Optional<Team> getTeamByName(String name) {
+        if (name == null) {
+            throw new RuntimeException("Team name cannot be null");
+        } else if (name.isEmpty()) {
+            throw new RuntimeException("Team name cannot be empty. Team name provided: " + name);
+        } else if (name.length() < 3) {
+            throw new RuntimeException("Team name must be at least 3 characters long. Team name provided: " + name);
+        } else if (name.length() > 50) {
+            throw new RuntimeException("Team name must be less than 50 characters long. Team name provided: " + name);
+        }
         Optional<Team> optionalTeam = Optional.empty();
         for (Team team : teams) {
-            if (team.getName().toLowerCase().equals(name.toLowerCase())) {
+            if (team.getName().equalsIgnoreCase(name)) {
                 optionalTeam = Optional.of(team);
                 return optionalTeam;
             }
