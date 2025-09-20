@@ -161,6 +161,26 @@ public class TeamService {
         return optionalTeam;
     }
 
+    public Optional<Team> getTeamByManager(String manager) {
+        if (manager == null) {
+            throw new RuntimeException("Manager name cannot be null");
+        } else if (manager.isEmpty()) {
+            throw new RuntimeException("Manager name cannot be empty. Manager name provided: " + manager);
+        } else if (manager.length() < 3) {
+            throw new RuntimeException("Manager name must be at least 3 characters long. Manager name provided: " + manager);
+        } else if (manager.length() > 50) {
+            throw new RuntimeException("Manager name must be less than 50 characters long. Manager name provided: " + manager);
+        }
+        Optional<Team> optionalTeam = Optional.empty();
+        for (Team team : teams) {
+            if (team.getManager().equalsIgnoreCase(manager)) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
+            }
+        }
+        return optionalTeam;
+    }
+
     public Iterable<Team> getAllTeams() {
         if (teams.isEmpty()) {
             throw new RuntimeException("No teams found");
