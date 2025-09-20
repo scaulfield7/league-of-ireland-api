@@ -13,7 +13,7 @@ public class TeamService {
     private final ScraperService scraperService;
     private final List<Team> teams;
 
-    public TeamService(ScraperService scraperService, PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer) throws Exception {
+    public TeamService(ScraperService scraperService) throws Exception {
         this.scraperService = scraperService;
         this.teams = new ArrayList<>();
 
