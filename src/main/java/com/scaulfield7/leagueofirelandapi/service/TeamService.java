@@ -141,6 +141,26 @@ public class TeamService {
         return optionalTeam;
     }
 
+    public Optional<Team> getTeamByHomePitch(String homePitch) {
+        if (homePitch == null) {
+            throw new RuntimeException("Home pitch cannot be null");
+        } else if (homePitch.isEmpty()) {
+            throw new RuntimeException("Home pitch cannot be empty. Home pitch provided: " + homePitch);
+        } else if (homePitch.length() < 3) {
+            throw new RuntimeException("Home pitch must be at least 3 characters long. Home pitch provided: " + homePitch);
+        } else if (homePitch.length() > 50) {
+            throw new RuntimeException("Home pitch must be less than 50 characters long. Home pitch provided: " + homePitch);
+        }
+        Optional<Team> optionalTeam = Optional.empty();
+        for (Team team : teams) {
+            if (team.getHomePitch().equalsIgnoreCase(homePitch)) {
+                optionalTeam = Optional.of(team);
+                return optionalTeam;
+            }
+        }
+        return optionalTeam;
+    }
+
     public Iterable<Team> getAllTeams() {
         if (teams.isEmpty()) {
             throw new RuntimeException("No teams found");
