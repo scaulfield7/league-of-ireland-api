@@ -1,15 +1,26 @@
 package com.scaulfield7.leagueofirelandapi.api;
 
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
+import com.scaulfield7.leagueofirelandapi.service.ScraperService;
 import com.scaulfield7.leagueofirelandapi.service.TeamService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TeamControllerTest {
 
+    private TeamService teamService;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        WebClient webClient = new WebClient();
+        ScraperService scraperService = new ScraperService(webClient);
+        teamService = new TeamService(scraperService);
+    }
+
     /*** Positive Tests ***/
     @Test
-    public void getTeamById_validTeamId_returnsTeam() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamById_validTeamId_returnsTeam() {
         int mockTeamId = 1;
         Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
         Team actualTeam = teamService.getTeamByID(mockTeamId).orElse(null);
@@ -26,8 +37,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByName_validTeamName_returnsTeam() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByName_validTeamName_returnsTeam() {
         String mockTeamName = "Athlone Town AFC";
         Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
         Team actualTeam = teamService.getTeamByName(mockTeamName).orElse(null);
@@ -44,8 +54,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByLeagueRanking_validLeagueRanking_returnsTeam() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByLeagueRanking_validLeagueRanking_returnsTeam() {
         int mockLeagueRanking = 1;
         Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
         Team actualTeam = teamService.getTeamByLeagueRanking(mockLeagueRanking).orElse(null);
@@ -62,8 +71,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByHomePitch_validHomePitch_returnsTeam() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByHomePitch_validHomePitch_returnsTeam() {
         String mockHomePitch = "Athlone Town Stadium";
         Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
         Team actualTeam = teamService.getTeamByHomePitch(mockHomePitch).orElse(null);
@@ -80,8 +88,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByManager_validManagerName_returnsTeam() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByManager_validManagerName_returnsTeam() {
         String mockManagerName = "Colin Fortune";
         Team expectedTeam = new Team(1, "Athlone Town AFC", 1, "Athlone Town Stadium", "Colin Fortune", "https://athlonetownafc.ie");
         Team actualTeam = teamService.getTeamByManager(mockManagerName).orElse(null);
@@ -98,8 +105,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getAllTeams_validRequest_returnsCorrectNumberOfTeams() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getAllTeams_validRequest_returnsCorrectNumberOfTeams() {
         int expectedNumberOfTeams = 12;
         int actualNumberOfTeams = teamService.getAllTeams().size();
         assert actualNumberOfTeams == expectedNumberOfTeams;
@@ -107,8 +113,7 @@ public class TeamControllerTest {
 
     /*** Negative Tests ***/
     @Test
-    public void getTeamById_invalidTeamId_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamById_invalidTeamId_throwsException() {
         int invalidTeamId = 13;
         try {
             teamService.getTeamByID(invalidTeamId).orElseThrow(() -> new RuntimeException("Team with ID " + invalidTeamId + " not found"));
@@ -118,8 +123,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamById_teamIdNull_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamById_teamIdNull_throwsException() {
         try {
             teamService.getTeamByID(null).orElseThrow(() -> new RuntimeException("Team ID cannot be null"));
         } catch (RuntimeException e) {
@@ -128,8 +132,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamById_negativeTeamId_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamById_negativeTeamId_throwsException() {
         int negativeTeamId = -1;
         try {
             teamService.getTeamByID(negativeTeamId).orElseThrow(() -> new RuntimeException("Team ID must be greater than 0"));
@@ -139,8 +142,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByName_invalidTeamName_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByName_invalidTeamName_throwsException() {
         String invalidTeamName = "Team Not In League FC";
         try {
             teamService.getTeamByName(invalidTeamName).orElseThrow(() -> new RuntimeException("No team found with name: " + invalidTeamName));
@@ -150,8 +152,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByName_teamNameNull_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByName_teamNameNull_throwsException() {
         try {
             teamService.getTeamByName(null).orElseThrow(() -> new RuntimeException("Team name cannot be null"));
         } catch (RuntimeException e) {
@@ -160,8 +161,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByName_teamNameEmpty_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByName_teamNameEmpty_throwsException() {
         String emptyTeamName = "";
         try {
             teamService.getTeamByName(emptyTeamName).orElseThrow(() -> new RuntimeException("Team name cannot be empty"));
@@ -171,8 +171,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByName_teamNameTooShort_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByName_teamNameTooShort_throwsException() {
         String shortTeamName = "AB";
         try {
             teamService.getTeamByName(shortTeamName).orElseThrow(() -> new RuntimeException("Team name must be at least 3 characters long"));
@@ -182,8 +181,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByName_teamNameTooLong_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByName_teamNameTooLong_throwsException() {
         String longTeamName = "A".repeat(51); // 51 characters long
         try {
             teamService.getTeamByName(longTeamName).orElseThrow(() -> new RuntimeException("Team name must be less than 50 characters long"));
@@ -193,8 +191,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByLeagueRanking_invalidLeagueRanking_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByLeagueRanking_invalidLeagueRanking_throwsException() {
         int invalidLeagueRanking = 13;
         try {
             teamService.getTeamByLeagueRanking(invalidLeagueRanking).orElseThrow(() -> new RuntimeException("Team with league ranking " + invalidLeagueRanking + " not found"));
@@ -204,8 +201,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByLeagueRanking_negativeLeagueRanking_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByLeagueRanking_negativeLeagueRanking_throwsException() {
         int negativeLeagueRanking = -1;
         try {
             teamService.getTeamByLeagueRanking(negativeLeagueRanking).orElseThrow(() -> new RuntimeException("League ranking value must be greater than 0"));
@@ -215,8 +211,7 @@ public class TeamControllerTest {
     }
     
     @Test
-    public void getTeamByHomePitch_invalidHomePitch_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByHomePitch_invalidHomePitch_throwsException() {
         String invalidHomePitch = "Non-Existent Stadium";
         try {
             teamService.getTeamByHomePitch(invalidHomePitch).orElseThrow(() -> new RuntimeException("No team found with home pitch: " + invalidHomePitch));
@@ -226,8 +221,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByHomePitch_homePitchNull_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByHomePitch_homePitchNull_throwsException() {
         try {
             teamService.getTeamByHomePitch(null).orElseThrow(() -> new RuntimeException("Home pitch cannot be null"));
         } catch (RuntimeException e) {
@@ -236,8 +230,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByHomePitch_homePitchEmpty_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByHomePitch_homePitchEmpty_throwsException() {
         String emptyHomePitch = "";
         try {
             teamService.getTeamByHomePitch(emptyHomePitch).orElseThrow(() -> new RuntimeException("Home pitch cannot be empty"));
@@ -247,8 +240,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByHomePitch_homePitchTooShort_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByHomePitch_homePitchTooShort_throwsException() {
         String shortHomePitch = "AB";
         try {
             teamService.getTeamByHomePitch(shortHomePitch).orElseThrow(() -> new RuntimeException("Home pitch must be at least 3 characters long"));
@@ -258,8 +250,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByHomePitch_homePitchTooLong_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByHomePitch_homePitchTooLong_throwsException() {
         String longHomePitch = "A".repeat(51); // 51 characters long
         try {
             teamService.getTeamByHomePitch(longHomePitch).orElseThrow(() -> new RuntimeException("Home pitch must be less than 50 characters long"));
@@ -269,8 +260,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByManager_invalidManagerName_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByManager_invalidManagerName_throwsException() {
         String invalidManagerName = "Non-Existent Manager";
         try {
             teamService.getTeamByManager(invalidManagerName).orElseThrow(() -> new RuntimeException("No team found with manager: " + invalidManagerName));
@@ -280,8 +270,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByManager_managerNameNull_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByManager_managerNameNull_throwsException() {
         try {
             teamService.getTeamByManager(null).orElseThrow(() -> new RuntimeException("Manager name cannot be null"));
         } catch (RuntimeException e) {
@@ -290,8 +279,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByManager_managerNameEmpty_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByManager_managerNameEmpty_throwsException() {
         String emptyManagerName = "";
         try {
             teamService.getTeamByManager(emptyManagerName).orElseThrow(() -> new RuntimeException("Manager name cannot be empty"));
@@ -301,8 +289,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByManager_managerNameTooShort_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByManager_managerNameTooShort_throwsException() {
         String shortManagerName = "AB";
         try {
             teamService.getTeamByManager(shortManagerName).orElseThrow(() -> new RuntimeException("Manager name must be at least 3 characters long"));
@@ -312,8 +299,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getTeamByManager_managerNameTooLong_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getTeamByManager_managerNameTooLong_throwsException() {
         String longManagerName = "A".repeat(51); // 51 characters long
         try {
             teamService.getTeamByManager(longManagerName).orElseThrow(() -> new RuntimeException("Manager name must be less than 50 characters long"));
@@ -323,8 +309,7 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void getAllTeams_invalidRequest_throwsException() throws Exception {
-        TeamService teamService = new TeamService();
+    public void getAllTeams_invalidRequest_throwsException() {
         try {
             teamService.getAllTeams();
         } catch (RuntimeException e) {
