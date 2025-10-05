@@ -1,6 +1,6 @@
 package com.scaulfield7.leagueofirelandapi.api;
 
-import com.gargoylesoftware.htmlunit.WebClient;
+import org.htmlunit.WebClient;
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
 import com.scaulfield7.leagueofirelandapi.service.ScraperService;
 import com.scaulfield7.leagueofirelandapi.service.TeamService;
