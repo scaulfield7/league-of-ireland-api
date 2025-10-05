@@ -3,7 +3,6 @@ package com.scaulfield7.leagueofirelandapi.service;
 import org.htmlunit.html.*;
 import com.scaulfield7.leagueofirelandapi.api.model.Team;
 import jakarta.annotation.PostConstruct;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
